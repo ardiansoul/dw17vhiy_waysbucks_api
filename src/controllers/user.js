@@ -15,7 +15,7 @@ const index = async (req, res, next) => {
     console.error(err);
     return res.status(500).json({
       status: "Error",
-      message: err,
+      message: err.message,
     });
   }
 };
@@ -52,14 +52,14 @@ const destroy = async (req, res) => {
     console.error(err);
     return res.status(500).json({
       status: "Error",
-      message: err,
+      message: err.message,
     });
   }
 };
 
 const getUser = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.user;
     const getData = await User.findOne({
       where: {
         id,
@@ -76,7 +76,7 @@ const getUser = async (req, res) => {
     console.error(err);
     return res.status(500).json({
       status: "Error",
-      message: err,
+      message: err.message,
     });
   }
 };

@@ -181,7 +181,7 @@ const index = async (req, res, next) => {
     console.log(err);
     res.status(500).json({
       status: "Error",
-      message: err,
+      message: err.message,
     });
   }
 };
@@ -369,7 +369,7 @@ const update = async (req, res, next) => {
     console.error(err);
     return res.status(500).json({
       status: "Error",
-      message: err,
+      message: err.message,
     });
   }
 };

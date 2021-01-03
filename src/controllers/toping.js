@@ -43,7 +43,7 @@ const index = async (req, res, next) => {
     console.error(err);
     return res.status(500).json({
       status: "error",
-      message: err.name,
+      message: err.message,
     });
   }
 };
@@ -94,7 +94,7 @@ const store = async (req, res, next) => {
     console.error(err);
     return res.status(500).json({
       status: "Error",
-      message: err,
+      message: err.message,
     });
   }
 };
@@ -175,7 +175,7 @@ const destroy = async (req, res, next) => {
     console.error(err);
     return res.status(500).json({
       status: "Error",
-      message: err,
+      message: err.message,
     });
   }
 };
