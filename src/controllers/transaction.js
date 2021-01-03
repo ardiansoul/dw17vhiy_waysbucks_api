@@ -228,13 +228,12 @@ const store = async (req, res, next) => {
     });
 
     for (const product of products) {
-      console.log(product);
       let createTransactionProduct = await TransactionProduct.create({
         transactionId: createTransaction.id,
         amount: product.amount,
         productId: product.productId,
       });
-      if (product.topings > 0) {
+      if (product.topings.length > 0) {
         await Promise.all(
           product.topings.map(async (toping) => {
             await TransactionToping.create({
