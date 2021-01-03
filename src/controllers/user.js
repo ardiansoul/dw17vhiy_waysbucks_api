@@ -2,22 +2,6 @@ const { User } = require("../../models");
 
 const index = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    if (id) {
-      const getData = await User.findOne({
-        where: {
-          id,
-        },
-        attributes: {
-          exclude: ["createdAt", "updatedAt", "role", "password"],
-        },
-      });
-      return res.status(200).json({
-        status: "Success",
-        data: { users: getData },
-      });
-    }
-
     const getData = await User.findAll({
       attributes: {
         exclude: ["createdAt", "updatedAt", "role", "password"],
@@ -73,7 +57,32 @@ const destroy = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const getData = await User.findOne({
+      where: {
+        id,
+      },
+      attributes: {
+        exclude: ["createdAt", "updatedAt", "role", "password"],
+      },
+    });
+    return res.status(200).json({
+      status: "Success",
+      data: { users: getData },
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      status: "Error",
+      message: err,
+    });
+  }
+};
+
 module.exports = {
   index,
   destroy,
+  getUser,
 };
