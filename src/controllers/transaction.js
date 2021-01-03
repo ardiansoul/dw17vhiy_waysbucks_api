@@ -234,14 +234,16 @@ const store = async (req, res, next) => {
         amount: product.amount,
         productId: product.productId,
       });
-      await Promise.all(
-        product.topings.map(async (toping) => {
-          await TransactionToping.create({
-            transactionProductId: createTransactionProduct.id,
-            topingId: toping,
-          });
-        })
-      );
+      if (product.topings > 0) {
+        await Promise.all(
+          product.topings.map(async (toping) => {
+            await TransactionToping.create({
+              transactionProductId: createTransactionProduct.id,
+              topingId: toping,
+            });
+          })
+        );
+      }
     }
 
     const getTransaction = await Transaction.findOne({
